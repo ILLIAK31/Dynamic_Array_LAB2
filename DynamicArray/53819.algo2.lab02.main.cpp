@@ -24,6 +24,7 @@ public:
 	void Change(int index, T Value);
 	void Clear();
 	void To_String(int obj_size);
+	void Bubble_Sort();
 };
 
 template <class T>
@@ -98,9 +99,27 @@ void Dynamic_Array<T>::To_String(int obj_size)
 	}
 }
 
+template<class T>
+void Dynamic_Array<T>::Bubble_Sort()
+{
+	T copy;
+	for (int index1 = 0; index1 < this->Size - 1; ++index1)
+	{
+		for (int index2 = 0; index2 < this->Size - index1 - 1; ++index2)
+		{
+			if (this->value[index2] > this->value[index2 + 1])
+			{
+				copy = this->value[index2 + 1];
+				this->value[index2+1] = this->value[index2];
+				this->value[index2] = copy;
+			}
+		}
+	}
+}
+
 int main()
 {
 	Dynamic_Array<int>* array = new Dynamic_Array<int>();
-	// Bubble sort
+	//
 	return 0;
 }
