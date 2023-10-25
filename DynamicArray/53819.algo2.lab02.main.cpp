@@ -16,12 +16,14 @@ public:
 	T operator[](int index)
 	{
 		if (index < 0 || index >= this->Size)
-			std::cout << "Wrong index" << std::endl;
+			std::cout << "Wrong index\n" << std::endl;
 		else
 			return this->value[index];
 	}
 	void Get_by_index(int index);
 	void Change(int index, T Value);
+	void Clear();
+	void To_String(int obj_size);
 };
 
 template <class T>
@@ -56,7 +58,7 @@ template<class T>
 void Dynamic_Array<T>::Get_by_index(int index)
 {
 	if (index < 0 || index >= this->Size)
-		std::cout << "Wrong index" << std::endl;
+		std::cout << "Wrong index\n" << std::endl;
 	else
 		std::cout << "Value : " << (*this)[index] << std::endl;
 }
@@ -65,13 +67,40 @@ template<class T>
 void Dynamic_Array<T>::Change(int index, T Value)
 {
 	if (index < 0 || index >= this->Size)
-		std::cout << "Wrong index" << std::endl;
+		std::cout << "Wrong index\n" << std::endl;
 	else
 		this->value[index] = Value;
+}
+
+template<class T>
+void Dynamic_Array<T>::Clear()
+{
+	for (int index = 0; index < this->Size; ++index) {this->value[index] = NULL;}
+	delete [] this->value;
+	this->value = nullptr;
+	this->Size = 0;
+	this->Max_Size = 1;
+}
+
+template<class T>
+void Dynamic_Array<T>::To_String(int obj_size)
+{
+	if (obj_size < 0 || obj_size > this->Size)
+		std::cout << "Wrong size of objects\n";
+	else
+	{
+		std::cout << "\t| Dynamic Array |\n";
+		std::cout << "| Size : " << this->Size << " | Max Size : " << this->Max_Size << " | Address of DA : " << this << " | Address of array : " << this->value << " |\n";
+		for (int index = 0; index < obj_size; ++index)
+		{
+			std::cout << "| Object " << index + 1 << " : " << this->value[index] << " |\n";
+		}
+	}
 }
 
 int main()
 {
 	Dynamic_Array<int>* array = new Dynamic_Array<int>();
+	// Bubble sort
 	return 0;
 }
