@@ -1,8 +1,8 @@
 ﻿// ALGO2 IS1 224B LAB02
 // ILLIA KARMAZIN
 // ki53819@zut.edu.pl
-
 #include <iostream>
+#include <time.h>
 
 template <class T>
 class Dynamic_Array
@@ -120,6 +120,30 @@ void Dynamic_Array<T>::Bubble_Sort()
 int main()
 {
 	Dynamic_Array<int>* array = new Dynamic_Array<int>();
-	//
+	int Num{ 0 }, size{ 0 };
+	double average_per_object{ 0 }, worst_time{ 0 };
+	clock_t timer1 = clock();
+	for (int index1 = 0; index1 < pow(10, 5); ++index1)
+	{
+		Num = rand() % 1000;
+		clock_t timer3 = clock();
+		array->Add(Num);
+		clock_t timer4 = clock();
+		average_per_object += (timer4 - timer3) / (double)CLOCKS_PER_SEC;
+		++size;
+		if (((timer4 - timer3) / (double)CLOCKS_PER_SEC) > worst_time)
+		{
+			std::cout << "| New worst time from " << worst_time;
+			worst_time = ((timer4 - timer3) / (double)CLOCKS_PER_SEC);
+			std::cout << " s to " << worst_time << " s\n";
+		}
+	}
+	clock_t timer2 = clock();
+	array->To_String(array->Size);
+	average_per_object /= size;
+	average_per_object *= 1000;
+	std::cout << "| Full time : " << ((timer2 - timer1) / (double)CLOCKS_PER_SEC) << " s | Average time per object : " << average_per_object << " ms |\n";
+	array->Clear();
+	delete array;
 	return 0;
 }
